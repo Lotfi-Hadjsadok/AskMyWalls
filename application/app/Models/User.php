@@ -64,4 +64,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Property::class);
     }
+
+    public function chatbots()
+    {
+        return $this->hasMany(Chatbot::class);
+    }
+
+    public function chatbot()
+    {
+        return $this->hasOne(Chatbot::class);
+    }
 }

@@ -23,6 +23,21 @@
                 </flux:navlist.item>
             </flux:navlist.group>
         </flux:navlist>
+        <flux:navlist variant="outline">
+            <flux:navlist.group :heading="__('Chatbot')" class="grid">
+                <flux:navlist.item icon="home" :href="route('chatbot')" :current="request()->routeIs('chatbot')"
+                    wire:navigate>{{ __('AI Chat') }}
+                </flux:navlist.item>
+            </flux:navlist.group>
+        </flux:navlist>
+
+        <flux:navlist variant="outline">
+            <flux:navlist.group :heading="__('Demo')" class="grid">
+                <flux:navlist.item icon="home" :href="route('chatbot-demo')"
+                    :current="request()->routeIs('chatbot-demo')" wire:navigate>{{ __('Chatbot Demo') }}
+                </flux:navlist.item>
+            </flux:navlist.group>
+        </flux:navlist>
 
         <flux:spacer />
 

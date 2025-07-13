@@ -73,20 +73,32 @@
                 <flux:field>
                     <flux:label for="type">Type</flux:label>
                     <flux:select wire:model="form.type" id="type">
-                        <option value="House">House</option>
-                        <option value="Apartment">Apartment</option>
-                        <option value="Condo">Condo</option>
+                        <option value="" disabled selected>Select type</option>
+                        @foreach ($types as $type)
+                        <option value="{{ $type->value }}">{{ $type->label() }}</option>
+                        @endforeach
                     </flux:select>
                     <flux:error name="form.type" />
                 </flux:field>
                 <flux:field>
                     <flux:label for="status">Status</flux:label>
                     <flux:select wire:model="form.status" id="status">
-                        <option value="For Sale">For Sale</option>
-                        <option value="For Rent">For Rent</option>
-                        <option value="Sold">Sold</option>
+                        <option value="" disabled selected>Select status</option>
+                        @foreach ($statuses as $status)
+                        <option value="{{ $status->value }}">{{ $status->label() }}</option>
+                        @endforeach
                     </flux:select>
                     <flux:error name="form.status" />
+                </flux:field>
+                <flux:field>
+                    <flux:label for="availability">Availability</flux:label>
+                    <flux:select wire:model="form.availability" id="availability">
+                        <option value="" disabled selected>Select availability</option>
+                        @foreach ($availabilities as $availability)
+                        <option value="{{ $availability->value }}">{{ $availability->label() }}</option>
+                        @endforeach
+                    </flux:select>
+                    <flux:error name="form.availability" />
                 </flux:field>
                 <flux:field class="md:col-span-3">
                     <flux:label for="features">Features (comma-separated)</flux:label>

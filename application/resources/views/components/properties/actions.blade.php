@@ -8,7 +8,7 @@
         <flux:menu.item wire:click="$dispatch('edit-property', { propertyId: {{ $property->id }} })" icon="pencil">Edit
         </flux:menu.item>
         <flux:menu.item
-            @click="if(confirm('Are you sure you want to delete this property?')) { $wire.delete({{ $property->id }}); }"
+            @click="if(confirm('Are you sure you want to delete this property?')) { $wire.$parent.delete({{ $property->id }}); }"
             icon="trash">Delete</flux:menu.item>
     </flux:menu>
 </flux:dropdown>

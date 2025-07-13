@@ -20,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (!defined('AI_SERVER_URL')) {
+            define('AI_SERVER_URL', 'http://realestate-ai-server:3000');
+        }
+
         Model::unguard();
     }
 }

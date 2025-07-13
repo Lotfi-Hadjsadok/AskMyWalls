@@ -4,6 +4,9 @@ namespace Database\Factories;
 
 use App\Models\Property;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\PropertyType;
+use App\Models\PropertyStatus;
+use App\Models\PropertyAvailability;
 
 class PropertyFactory extends Factory
 {
@@ -24,8 +27,9 @@ class PropertyFactory extends Factory
             'bedrooms' => $this->faker->numberBetween(1, 6),
             'bathrooms' => $this->faker->numberBetween(1, 4),
             'area' => $this->faker->numberBetween(500, 5000),
-            'type' => $this->faker->randomElement(['House', 'Apartment', 'Condo']),
-            'status' => $this->faker->randomElement(['For Sale', 'For Rent', 'Sold']),
+            'type' => $this->faker->randomElement(PropertyType::cases())->value,
+            'status' => $this->faker->randomElement(PropertyStatus::cases())->value,
+            'availability' => $this->faker->randomElement(PropertyAvailability::cases())->value,
             'year_built' => $this->faker->year,
             'features' => $this->faker->words(5),
             'images' => [

@@ -4,6 +4,9 @@ namespace App\Livewire\Properties;
 
 use App\Livewire\Forms\PropertyForm;
 use App\Models\Property;
+use App\Models\PropertyType;
+use App\Models\PropertyStatus;
+use App\Models\PropertyAvailability;
 use Flux\Flux;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -33,16 +36,22 @@ class Upsert extends Component
     public function save()
     {
         if ($this->isEditing) {
+            $property = $this->form->property;
             $this->form->update();
-            $this->dispatch('property-updated');
+            $this->dispatch('property-updated.' . $property->id);
         } else {
             $this->form->store();
             $this->dispatch('property-created');
         }
+        Flux::modals()->close();
     }
 
     public function render()
     {
-        return view('livewire.properties.upsert');
+        return view('livewire.properties.upsert', [
+            'types' => PropertyType::cases(),
+            'statuses' => PropertyStatus::cases(),
+            'availabilities' => PropertyAvailability::cases(),
+        ]);
     }
 }

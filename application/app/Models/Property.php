@@ -4,33 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\PropertyType;
+use App\Models\PropertyStatus;
+use App\Models\PropertyAvailability;
 
 class Property extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'title',
-        'description',
-        'address',
-        'city',
-        'state',
-        'zip_code',
-        'country',
-        'latitude',
-        'longitude',
-        'price',
-        'bedrooms',
-        'bathrooms',
-        'area',
-        'type',
-        'status',
-        'features',
-        'images',
-        'videos',
-        'year_built',
-    ];
 
     protected $casts = [
         'features' => 'array',
@@ -39,6 +20,9 @@ class Property extends Model
         'price' => 'decimal:2',
         'latitude' => 'decimal:7',
         'longitude' => 'decimal:7',
+        'type' => PropertyType::class,
+        'status' => PropertyStatus::class,
+        'availability' => PropertyAvailability::class,
     ];
 
     public function user()

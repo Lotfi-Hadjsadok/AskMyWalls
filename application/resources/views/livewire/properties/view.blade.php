@@ -13,16 +13,25 @@
             <div><b>State:</b> {{ $property->state }}</div>
             <div><b>Zip:</b> {{ $property->zip_code }}</div>
             <div><b>Country:</b> {{ $property->country }}</div>
+            <div><b>Latitude:</b> {{ $property->latitude ?? 'N/A' }}</div>
+            <div><b>Longitude:</b> {{ $property->longitude ?? 'N/A' }}</div>
             <div><b>Price:</b> ${{ number_format($property->price, 2) }}</div>
             <div><b>Bedrooms:</b> {{ $property->bedrooms }}</div>
             <div><b>Bathrooms:</b> {{ $property->bathrooms }}</div>
             <div><b>Area:</b> {{ $property->area }}</div>
-            <div><b>Type:</b> {{ $property->type }}</div>
-            <div><b>Status:</b> {{ $property->status }}</div>
+            <div><b>Type:</b> {{ $property->type->label() }}</div>
+            <div><b>Status:</b> {{ $property->status->label() }}</div>
+            <div><b>Availability:</b> {{ $property->availability->label() }}</div>
             <div><b>Year Built:</b> {{ $property->year_built }}</div>
             <div><b>Features:</b> {{ is_array($property->features) ? implode(', ', $property->features) :
                 $property->features }}</div>
             <div><b>User:</b> {{ $property->user?->name ?? 'N/A' }}</div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div><b>Created At:</b> {{ $property->created_at ? $property->created_at->format('Y-m-d H:i') : 'N/A' }}
+            </div>
+            <div><b>Updated At:</b> {{ $property->updated_at ? $property->updated_at->format('Y-m-d H:i') : 'N/A' }}
+            </div>
         </div>
         <div>
             <b>Images:</b>

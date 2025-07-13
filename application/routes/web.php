@@ -1,14 +1,27 @@
 <?php
 
 use App\Livewire\Properties;
+use App\Livewire\Chatbot;
+use App\Livewire\ChatbotDemo;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Response;
+use App\Models\Property;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+Route::get('chatbot-test/{chatbotId?}', function ($chatbotId = 1) {
+    return view('chatbot-demo-layout', ['chatbotId' => $chatbotId]);
+})->name('chatbot.test');
+
+// Embeddable chatbot route
+Route::get('chatbot/embed/{chatbotId?}', function ($chatbotId = 1) {
+    return view('chatbot-embed', ['chatbotId' => $chatbotId]);
+})->name('chatbot.embed');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::view('dashboard', 'dashboard')
@@ -16,6 +29,13 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('properties', Properties::class)
         ->name('properties');
+
+    Route::get('chatbot', Chatbot::class)
+        ->name('chatbot');
+
+    Route::get('chatbot-demo/{chatbotId?}', function ($chatbotId = 1) {
+        return view('chatbot-demo-layout', ['chatbotId' => $chatbotId]);
+    })->name('chatbot-demo');
 });
 
 

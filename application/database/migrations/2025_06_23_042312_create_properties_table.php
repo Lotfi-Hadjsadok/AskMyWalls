@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -11,6 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        DB::statement('CREATE EXTENSION IF NOT EXISTS vector');
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
@@ -27,12 +29,14 @@ return new class extends Migration
             $table->integer('bedrooms');
             $table->integer('bathrooms');
             $table->integer('area');
-            $table->string('type'); // e.g., 'apartment', 'house', 'condo'
-            $table->string('status')->default('for_sale'); // e.g., 'for_sale', 'for_rent', 'sold'
-            $table->json('features')->nullable(); // e.g., ['swimming_pool', 'garage', 'garden']
+            $table->string('type');
+            $table->string('status')->default('for_sale');
+            $table->string('availability')->default('available');
+            $table->json('features')->nullable();
             $table->json('images')->nullable();
             $table->json('videos')->nullable();
             $table->year('year_built')->nullable();
+            $table->vector('embedding', 1536)->nullable();
             $table->timestamps();
         });
     }
