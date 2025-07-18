@@ -10,8 +10,7 @@
 </head>
 
 <body class="bg-transparent w-full h-screen overflow-hidden">
-    <livewire:chatbot-demo :chatbotId="$chatbotId" :embedded="true" />
-
+    <livewire:chatbot :chatbotId="$chatbotId" :embedded="true" />
     @livewireScripts
 </body>
 

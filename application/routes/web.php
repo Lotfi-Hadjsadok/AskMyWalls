@@ -3,6 +3,7 @@
 use App\Livewire\Properties;
 use App\Livewire\Chatbot;
 use App\Livewire\ChatbotDemo;
+use App\Livewire\ChatbotSettings;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -14,9 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('chatbot-test/{chatbotId?}', function ($chatbotId = 1) {
-    return view('chatbot-demo-layout', ['chatbotId' => $chatbotId]);
-})->name('chatbot.test');
 
 // Embeddable chatbot route
 Route::get('chatbot/embed/{chatbotId?}', function ($chatbotId = 1) {
@@ -33,9 +31,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('chatbot', Chatbot::class)
         ->name('chatbot');
 
-    Route::get('chatbot-demo/{chatbotId?}', function ($chatbotId = 1) {
-        return view('chatbot-demo-layout', ['chatbotId' => $chatbotId]);
-    })->name('chatbot-demo');
+    Route::get('chatbot/settings', ChatbotSettings::class)
+        ->name('chatbot.settings');
 });
 
 
